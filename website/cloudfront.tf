@@ -1,3 +1,12 @@
+# ---
+#  The AWS CloudFront config. Gets its data from an S3 bucket. Access to the S3 bucket
+#  is restricted to only this cloudfront distribution using a bucket policy
+#
+#  Redirects HTTP -> HTTPS and performs TLS termination using our ACM certificate
+#
+#  The DNS domain name points to the cloudfront DNS name (Alias record)
+# ---
+
 resource "aws_cloudfront_origin_access_identity" "cdn" {
   comment = "Website S3 Access"
 }
@@ -54,7 +63,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 }
 
 resource "aws_route53_record" "cdn" {
-  zone_id = data.aws_route53_zone.germis.zone_id
+  zone_id = data.aws_route53_zone.main.zone_id
   name    = local.domain_name
   type    = "A"
 

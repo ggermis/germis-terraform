@@ -1,3 +1,7 @@
+# ---
+#  The S3 bucket containing our static website
+# ---
+
 resource "aws_s3_bucket" "website" {
   bucket = local.domain_name
   acl    = "private"
@@ -11,7 +15,7 @@ resource "aws_s3_bucket" "website" {
   }
 }
 
-resource "aws_s3_bucket_policy" "website_policy" {
+resource "aws_s3_bucket_policy" "policy" {
   bucket = aws_s3_bucket.website.id
 
   policy = jsonencode({

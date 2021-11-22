@@ -7,7 +7,7 @@ provider "aws" {
   alias  = "us-east-1"
 }
 
-data "aws_route53_zone" "germis" {
+data "aws_route53_zone" "main" {
   name         = local.domain_name
   private_zone = false
 }

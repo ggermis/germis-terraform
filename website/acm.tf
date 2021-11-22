@@ -1,3 +1,8 @@
+# ---
+#  The ACM SSL certificate used on our site. Note that this needs to be created in the
+#  us-east-1 region in order to work with AWS CloudFront
+# ---
+
 resource "aws_acm_certificate" "website" {
   provider          = aws.us-east-1
   domain_name       = local.domain_name
@@ -19,7 +24,7 @@ resource "aws_route53_record" "validation" {
       name    = dvo.resource_record_name
       type    = dvo.resource_record_type
       record  = dvo.resource_record_value
-      zone_id = data.aws_route53_zone.germis.zone_id
+      zone_id = data.aws_route53_zone.main.zone_id
     }
   }
   allow_overwrite = true
