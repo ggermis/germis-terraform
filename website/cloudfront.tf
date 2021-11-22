@@ -1,14 +1,14 @@
-resource "aws_cloudfront_origin_access_identity" "website" {
+resource "aws_cloudfront_origin_access_identity" "cdn" {
   comment = "Website S3 Access"
 }
 
-resource "aws_cloudfront_distribution" "website" {
+resource "aws_cloudfront_distribution" "cdn" {
   origin {
     domain_name = aws_s3_bucket.website.bucket_regional_domain_name
     origin_id   = aws_s3_bucket.website.bucket_regional_domain_name
 
     s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.website.cloudfront_access_identity_path
+      origin_access_identity = aws_cloudfront_origin_access_identity.cdn.cloudfront_access_identity_path
     }
   }
 
@@ -53,14 +53,14 @@ resource "aws_cloudfront_distribution" "website" {
   }
 }
 
-resource "aws_route53_record" "website" {
+resource "aws_route53_record" "cdn" {
   zone_id = data.aws_route53_zone.germis.zone_id
   name    = local.domain_name
   type    = "A"
 
   alias {
-    name                   = aws_cloudfront_distribution.website.domain_name
-    zone_id                = aws_cloudfront_distribution.website.hosted_zone_id
+    name                   = aws_cloudfront_distribution.cdn.domain_name
+    zone_id                = aws_cloudfront_distribution.cdn.hosted_zone_id
     evaluate_target_health = false
   }
 }
