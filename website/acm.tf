@@ -1,12 +1,9 @@
 resource "aws_acm_certificate" "website" {
-  provider = aws.us-east-1
-
-  domain_name = local.domain_name
-
+  provider          = aws.us-east-1
+  domain_name       = local.domain_name
   validation_method = "DNS"
-
   tags = {
-    CreatedBy   = "terraform"
+    CreatedBy = "terraform"
   }
 }
 

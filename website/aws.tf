@@ -1,14 +1,14 @@
 provider "aws" {
-	region = "eu-central-1"
+  region = "eu-central-1"
 }
 
 provider "aws" {
-	region = "us-east-1"
-	alias = "us-east-1"
+  region = "us-east-1"
+  alias  = "us-east-1"
 }
 
 data "aws_route53_zone" "germis" {
-  name         = "germis.be"
+  name         = local.domain_name
   private_zone = false
 }
 

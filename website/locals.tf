@@ -1,3 +1,3 @@
 locals {
-	domain_name = "germis.be"
+  domain_name = "germis.be"
 }
